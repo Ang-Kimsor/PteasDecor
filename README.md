@@ -207,9 +207,9 @@ Contributions are welcome! Feel free to fork the repo, create feature branches, 
 
 ## Contact 📬
 
-**Ang Kimsor** - [Telegram](https://t.me/Thirtieth_October) - [angkimsor@gmail.com](mailto:angkimsor@gmail.com) - **Call Me ☎️ +85587932289**
+**Ang Kimsor** - [Telegram](https://t.me/Thirtieth_October) - [angkimsor@gmail.com](mailto:angkimsor@gmail.com) - **Call Me ☎️ +855 87 932 289**
 
-**Nak Danin** - [Telegram](https://nakdanin) - [nakdanin@gmail.com](mailto:nakdanin@gmail.com) - **Call Me ☎️**
+**Nak Danin** - [Telegram](https://t.me/nakdanin) - [nakdanin9@gmail.com](mailto:nakdanin9@gmail.com) - **Call Me ☎️ +855 85 201 548**
 
 **Heng Ousa** - [Telegram](https://hengousa) - [hengousa@gmail.com](mailto:hengousa@gmail.com) - **Call Me ☎️**
 
