@@ -1,12 +1,19 @@
+// React
 import { Link } from "react-router-dom";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import {
-  BigHero,
   ProductCard,
   CategoryCard,
   CustomerReview,
   BlogCard,
   QuestionDropDown,
 } from "../../components";
+// Data
 import {
   BigHeroData,
   FeatureProductData,
@@ -16,6 +23,42 @@ import {
   BlogData,
   QuestionData,
 } from "../../data/Home";
+// Component Big Hero
+const BigHero = loadable(
+  () => import("./../../components/Home/BigHeroSection"),
+  {
+    fallback: (
+      <section className="relative w-full h-auto">
+        <Skeleton
+          width="100%"
+          height="500px"
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+        <div className="absolute top-0 left-0 flex items-center justify-center size-full">
+          <div className="lg:w-[700px] md:w-[70%] w-[88%]">
+            <Skeleton
+              height="50px"
+              baseColor="#949292"
+              highlightColor="#bebebe"
+            />
+            <Skeleton
+              height="20px"
+              baseColor="#949292"
+              highlightColor="#bebebe"
+            />
+            <Skeleton
+              className="mt-5"
+              height="30px"
+              baseColor="#949292"
+              highlightColor="#bebebe"
+            />
+          </div>
+        </div>
+      </section>
+    ),
+  }
+);
 
 const Home = () => {
   return (

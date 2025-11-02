@@ -1,16 +1,24 @@
+// React
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+// Logo
+import logo from "./../../assets/Logo/PteasDecor.png";
+// Icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faShoppingBag,
   faBars,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-import logo from "./../../assets/Logo/PteasDecor.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+// Data
 import { MenuLi, SocialIcon } from "../../data/Navbar";
+// Animation
+import { motion } from "framer-motion";
 const navbar = () => {
+  // menu state open/close
   const [menuopen, setMenuopen] = useState(false);
+  // effect
   useEffect(() => {
     if (menuopen) {
       document.body.style.overflow = "hidden";
@@ -23,6 +31,7 @@ const navbar = () => {
   }, [menuopen]);
   return (
     <>
+      {/* Aside */}
       <aside
         className={`${
           menuopen ? "translate-x-0" : "-translate-x-full"
@@ -51,39 +60,140 @@ const navbar = () => {
           ))}
         </div>
       </aside>
-      <nav className="sticky top-0 w-full h-[90px] flex items-center justify-between md:px-10 px-5 bg-white border-b-2 border-black/30 z-[100]">
+      {/* Navbar */}
+      <motion.nav
+        className="sticky top-0 w-full h-[90px] flex items-center justify-between md:px-10 px-5 bg-white border-b-2 border-black/30 z-[100]"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.2 } },
+        }}
+      >
         {/* Icon Logo */}
-        <div className="w-[100px] h-[65px] flex items-center font-poppins">
-          <img src={logo} alt="" className="size-full" />
-        </div>
+        <motion.div
+          className="w-[100px] h-[65px] flex items-center font-poppins"
+          variants={{
+            hidden: { y: -10, opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeInOut" },
+            },
+          }}
+        >
+          <img src={logo} alt="Pteas Decor Logo" className="size-full" />
+        </motion.div>
         {/* Menu list */}
-        <ul className="justify-center hidden gap-6 font-semibold uppercase md:flex text-md font-oxygen">
-          {MenuLi.map(({ name, path }, index) => (
-            <li
-              key={index}
-              className="text-black/70 hover:text-black"
-              onClick={() => setMenuopen(false)}
-            >
-              <Link to={path}>{name}</Link>
-            </li>
-          ))}
-        </ul>
-        {/* Icon list */}
-        <div className="flex items-center h-full gap-4 text-lg">
-          <Link
-            to={"/LogIn"}
-            className="flex items-center gap-2 cursor-pointer"
+        <motion.div
+          variants={{
+            hidden: { y: -10, opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeInOut" },
+            },
+          }}
+        >
+          <motion.ul
+            className="justify-center hidden gap-6 font-semibold uppercase md:flex text-md font-oxygen"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.2 } },
+            }}
           >
-            <FontAwesomeIcon icon={faUser} />
-          </Link>
-          <Link to="/Cart">
-            <FontAwesomeIcon className="cursor-pointer" icon={faShoppingBag} />
-          </Link>
-          <span className="md:hidden" onClick={() => setMenuopen(true)}>
-            <FontAwesomeIcon className="cursor-pointer" icon={faBars} />
-          </span>
-        </div>
-      </nav>
+            {MenuLi.map(({ name, path }, index) => (
+              <motion.li
+                key={index}
+                className="text-black/70 hover:text-black"
+                onClick={() => setMenuopen(false)}
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+              >
+                <Link to={path}>{name}</Link>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </motion.div>
+        {/* Icon list */}
+        <motion.div
+          variants={{
+            hidden: { y: -10, opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeInOut" },
+            },
+          }}
+        >
+          <motion.div
+            className="flex items-center h-full gap-4 text-lg"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.2 } },
+            }}
+          >
+            <motion.span
+              variants={{
+                hidden: { y: -10, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                },
+              }}
+            >
+              <Link
+                to={"/LogIn"}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <FontAwesomeIcon icon={faUser} />
+              </Link>
+            </motion.span>
+            <motion.span
+              variants={{
+                hidden: { y: -10, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                },
+              }}
+            >
+              <Link to="/Cart">
+                <FontAwesomeIcon
+                  className="cursor-pointer"
+                  icon={faShoppingBag}
+                />
+              </Link>
+            </motion.span>
+            <motion.span
+              className="md:hidden"
+              onClick={() => setMenuopen(true)}
+              variants={{
+                hidden: { y: -10, opacity: 0 },
+                visible: {
+                  y: 0,
+                  opacity: 1,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                },
+              }}
+            >
+              <FontAwesomeIcon className="cursor-pointer" icon={faBars} />
+            </motion.span>
+          </motion.div>
+        </motion.div>
+      </motion.nav>
     </>
   );
 };

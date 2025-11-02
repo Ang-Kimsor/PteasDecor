@@ -96,3 +96,23 @@ const App = () => {
 };
 
 export default App;
+
+// import loadable from "@loadable/component";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
+
+// // Lazy load the heavy component
+// const MyHeavyComponent = loadable(() => import("./components/test"), {
+//   fallback: <Skeleton height={100} style={{ borderRadius: "8px" }} />,
+// });
+
+// function App() {
+//   return (
+//     <div style={{ padding: "50px", maxWidth: "400px", margin: "0 auto" }}>
+//       <h1>Lazy Loading + Skeleton + Motion Example</h1>
+//       <MyHeavyComponent />
+//     </div>
+//   );
+// }
+
+// export default App;
