@@ -46,7 +46,7 @@
 
 ## About The Project
 
-[![Project Screenshot][project-screenshot]](https://example.com)
+[![Project Screenshot][project-screenshot]]()
 
 There are plenty of e-commerce projects out there, but I didn’t find one that perfectly fit a modern home decoration store built with ReactJS — so I created PteasDecor. This project aims to be a clean, easy-to-use template for anyone building a home décor shopping site.
 
