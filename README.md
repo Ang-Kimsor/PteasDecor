@@ -197,7 +197,7 @@ Use the app to browse home decoration products, view detailed product informatio
 Contributions are welcome! Feel free to fork the repo, create feature branches, and submit pull requests. Please open issues for bugs or feature requests.
 
 <a href="https://github.com/Ang-Kimsor/PteasDecor/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Kimsor1111/PteasDecor" alt="contrib.rocks image" />
+  <img src="https://contrib.rocks/image?repo=Ang-Kimsor/PteasDecor" alt="contrib.rocks image" />
 </a>
 
 <p id="contact">
