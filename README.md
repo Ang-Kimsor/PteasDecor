@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-  <a href="https://github.com/Kimsor1111/PteasDecor">
+  <a href="https://github.com/Ang-Kimsor/PteasDecor">
     <img src="src/assets/Logo/PteasDecor.png" alt="Logo" width="250" height="250">
   </a>
 
@@ -101,7 +101,7 @@ Make sure you have the following installed to run this project:
 1. Clone the repository
 
    ```sh
-   git clone https://github.com/Kimsor1111/PteasDecor.git
+   git clone https://github.com/Ang-Kimsor/PteasDecor.git
    ```
 
 2. Open PteasDecor Project
@@ -196,7 +196,7 @@ Use the app to browse home decoration products, view detailed product informatio
 
 Contributions are welcome! Feel free to fork the repo, create feature branches, and submit pull requests. Please open issues for bugs or feature requests.
 
-<a href="https://github.com/Kimsor1111/PteasDecor/graphs/contributors">
+<a href="https://github.com/Ang-Kimsor/PteasDecor/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Kimsor1111/PteasDecor" alt="contrib.rocks image" />
 </a>
 
@@ -211,9 +211,7 @@ Contributions are welcome! Feel free to fork the repo, create feature branches, 
 
 **Nak Danin** - [Telegram](https://t.me/nakdanin) - [nakdanin9@gmail.com](mailto:nakdanin9@gmail.com) - **Call Me ☎️ +855 85 201 548**
 
-**Heng Ousa** - [Telegram](https://hengousa) - [hengousa@gmail.com](mailto:hengousa@gmail.com) - **Call Me ☎️**
-
-Project Link: [https://github.com/Kimsor1111/PteasDecor](https://github.com/Kimsor1111/PteasDecor)
+Project Link: [https://github.com/Ang-Kimsor/PteasDecor](https://github.com/Ang-Kimsor/PteasDecor)
 
 <p id="acknowledgments">
 </p>
