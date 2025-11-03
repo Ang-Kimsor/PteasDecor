@@ -1,5 +1,7 @@
+// Icons
 import { faHeart, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Link
 import { Link } from "react-router-dom";
 const WishlistWidget = ({ img, name, price, discount, wishlist, setHeart }) => {
   return (

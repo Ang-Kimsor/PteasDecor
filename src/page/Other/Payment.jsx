@@ -1,10 +1,38 @@
+// React
 import { useEffect, useState } from "react";
-import {
-  InputForm,
-  CartDetails,
-  SuccessPayment,
-  FailedPayment,
-} from "../../components";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
+// Component
+import { SuccessPayment, FailedPayment } from "../../components";
+const InputForm = loadable(() => import("./../../components/Cart/InputForm"), {
+  fallback: (
+    <Skeleton
+      width={"100%"}
+      height={"40px"}
+      baseColor="#b8b8b8"
+      highlightColor="#e2e2e2"
+    />
+  ),
+});
+const CartDetails = loadable(
+  () => import("./../../components/Cart/CartDetails"),
+  {
+    fallback: (
+      <Skeleton
+        width={"100%"}
+        height={"440px"}
+        baseColor="#b8b8b8"
+        highlightColor="#e2e2e2"
+        borderRadius={"5px"}
+      />
+    ),
+  }
+);
 const Payment = () => {
   const validCard = [
     { name: "John Doe", cardnum: 12345, cvv: 9999 },
@@ -54,14 +82,24 @@ const Payment = () => {
   return (
     <main className="w-full h-full flex flex-col items-center gap-8 mt-[50px] font-exo">
       <section className="w-[95%]">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl  font-bold text-[#2d2d2d]">Payment</h1>
-        </div>
-        <p className="text-[16px] text-[#575757] mt-4 ">
+        <motion.h1
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-3xl  font-bold text-[#2d2d2d]"
+        >
+          Payment
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-[16px] text-[#575757] mt-4 "
+        >
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
           nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
           volutpat.
-        </p>
+        </motion.p>
       </section>
       <section className="w-[95%] flex flex-col lg:flex-row gap-10 lg:gap-[4%]">
         <aside className="w-full lg:w-[58%] h-fit rounded-xl flex flex-col pb-5">

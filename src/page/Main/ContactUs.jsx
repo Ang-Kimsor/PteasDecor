@@ -1,11 +1,18 @@
+// Motion
+import { motion } from "framer-motion";
 const Contact = () => {
   return (
-    <div className="w-full h-full flex justify-center my-[60px] md:my-[80px]">
-      <main className="w-[95%] md:w-[90%] h-full rounded-[20px] border-2 border-black/30 pb-[50px]">
+    <main className="w-full h-full flex justify-center my-[60px] md:my-[80px]">
+      <motion.div
+        className="w-[95%] md:w-[90%] h-full rounded-[20px] border-2 border-black/30 pb-[50px]"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
         <h1 className="p-[20px] bg-[#20263E] text-white text-[25px] border-b-2 border-black/30 rounded-t-[18px] font-oxygen">
           Get In Touch With Us
         </h1>
-        <main className="flex flex-col lg:flex-row px-[30px] py-[30px] gap-[30px] w-full">
+        <section className="flex flex-col lg:flex-row px-[30px] py-[30px] gap-[30px] w-full">
           <aside className="w-full lg:w-[40%]">
             <div className="pb-[30px]">
               <h1>Phone Number</h1>
@@ -73,9 +80,9 @@ const Contact = () => {
               </button>
             </form>
           </aside>
-        </main>
-      </main>
-    </div>
+        </section>
+      </motion.div>
+    </main>
   );
 };
 

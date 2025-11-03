@@ -1,4 +1,7 @@
+// React
 import { useEffect, useState } from "react";
+// Motion
+import { motion } from "framer-motion";
 const InputForm = ({ label, type, onValidChange, value, setValue }) => {
   const [expiry, setExpiry] = useState("");
   const [error, setError] = useState("");
@@ -24,7 +27,12 @@ const InputForm = ({ label, type, onValidChange, value, setValue }) => {
   }, [expiry, type, onValidChange]);
 
   return (
-    <div className="flex flex-col w-full gap-2">
+    <motion.div
+      className="flex flex-col w-full gap-2"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <label className="text-[#3D3D3D]">
         {label} <span className="text-red-500">*</span>
       </label>
@@ -53,7 +61,7 @@ const InputForm = ({ label, type, onValidChange, value, setValue }) => {
           required
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

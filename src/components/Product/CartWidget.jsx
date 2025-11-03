@@ -1,6 +1,8 @@
+// React
+import { Link } from "react-router-dom";
+// Icons
 import { faMoneyBill, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 const CartWidget = ({
   img,
   name,

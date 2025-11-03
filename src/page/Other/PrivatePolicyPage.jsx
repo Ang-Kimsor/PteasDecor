@@ -1,6 +1,7 @@
-import React from "react";
+// React
 import { useParams } from "react-router-dom";
-
+// Motion
+import { motion } from "framer-motion";
 const PrivatePolicyPage = () => {
   let { privacypolicy } = useParams();
   privacypolicy = privacypolicy.replaceAll("-", " ");
@@ -15,11 +16,39 @@ const PrivatePolicyPage = () => {
   ];
   return (
     <main className="w-full flex items-center justify-center mt-8 font-oxygen">
-      <div className="w-[95%] flex flex-col gap-5">
-        <h1 className="text-[38px] font-bold text-[#2D2D2D]">
+      <motion.div
+        className="w-[95%] flex flex-col gap-5"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.2 } },
+        }}
+      >
+        <motion.h1
+          variants={{
+            hidden: { y: -10, opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeInOut" },
+            },
+          }}
+          className="text-[38px] font-bold text-[#2D2D2D]"
+        >
           {privacypolicy}
-        </h1>
-        <span className="md:text-lg text-sm text-[#414141] flex flex-col gap-8">
+        </motion.h1>
+        <motion.span
+          variants={{
+            hidden: { y: -10, opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: { duration: 0.5, ease: "easeInOut" },
+            },
+          }}
+          className="md:text-lg text-sm text-[#414141] flex flex-col gap-8"
+        >
           <p>{p}</p>
           <p>{p}</p>
           <ul className="list-disc list-inside">
@@ -41,8 +70,8 @@ const PrivatePolicyPage = () => {
           <p>{p}</p>
           <p>{p}</p>
           <p>{p}</p>
-        </span>
-      </div>
+        </motion.span>
+      </motion.div>
     </main>
   );
 };

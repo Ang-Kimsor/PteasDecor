@@ -1,15 +1,22 @@
+// Image
 import track from "./../../assets/TrackOrder/trackorder.jpg";
+// React
 import { Link } from "react-router-dom";
+// Motion
+import { motion } from "framer-motion";
 const TrackingOrder = () => {
   return (
-    <main className="w-full mt-16 pt-5 flex gap-20 items-start justify-center font-oxygen">
-      <div
-        className={`w-[95%] py-10 lg:pr-10 bg-[#f6f6f8] grid lg:grid-cols-2 grid-cols-1`}
-      >
+    <motion.main
+      className="w-full mt-16 pt-5 flex gap-20 items-start justify-center font-oxygen"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
+      <div className="w-[95%] py-10 lg:pr-10 bg-[#f6f6f8] grid lg:grid-cols-2 grid-cols-1">
         <div className="lg:px-10 px-5 size-full flex justify-center">
           <img
             src={track}
-            alt=""
+            alt="Tracking Image"
             className="h-[300px] object-cover object-center"
           />
         </div>
@@ -52,7 +59,7 @@ const TrackingOrder = () => {
           </div>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 };
 

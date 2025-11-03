@@ -1,9 +1,16 @@
+// Icons
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// Motion
+import { motion } from "framer-motion";
 const PaymentCard = ({ img, cardNumber, name, cvv, expiry, Default }) => {
   return (
-    <main className="relative grid grid-cols-[3fr_2fr_1fr] md:grid-cols-[3fr_2fr_1fr_2fr_1fr] py-2 md:py-4 gap-6 border border-[#949494] rounded-md text-[10px] md:text-[14px] lg:text-[15px] bg-gray-100">
+    <motion.main
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="relative grid grid-cols-[3fr_2fr_1fr] md:grid-cols-[3fr_2fr_1fr_2fr_1fr] py-2 md:py-4 gap-6 border border-[#949494] rounded-md text-[10px] md:text-[14px] lg:text-[15px] bg-gray-100"
+    >
       <div className="flex flex-col gap-1 ps-4">
         <label>Card Number</label>
         <span className="rounded-full w-full py-[4px] px-1 md:px-2 flex items-center gap-1 border border-[#949494] bg-white text-gray-500 font-oxygen">
@@ -40,7 +47,7 @@ const PaymentCard = ({ img, cardNumber, name, cvv, expiry, Default }) => {
           Default
         </span>
       )}
-    </main>
+    </motion.main>
   );
 };
 

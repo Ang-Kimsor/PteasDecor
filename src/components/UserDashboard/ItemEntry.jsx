@@ -1,3 +1,5 @@
+// Motion
+import { motion } from "framer-motion";
 const List = ({
   length,
   index,
@@ -9,7 +11,10 @@ const List = ({
   img,
 }) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className={`${
         length - 1 == index ? "border-y" : "border-t"
       } h-[65px] border-gray-500/40 flex items-center justify-between`}
@@ -34,7 +39,7 @@ const List = ({
           ${(qty * price * (1 - discount / 100)).toFixed(2)}
         </span>
       </p>
-    </div>
+    </motion.div>
   );
 };
 

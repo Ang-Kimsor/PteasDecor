@@ -1,4 +1,7 @@
+// React
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBook,
@@ -7,8 +10,27 @@ import {
   faTruck,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { ItemEntry } from "./../../components";
-import { useSelector } from "react-redux";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
+const ItemEntry = loadable(
+  () => import("./../../components/UserDashboard/ItemEntry"),
+  {
+    fallback: (
+      <Skeleton
+        width={"100%"}
+        height={"60px"}
+        baseColor="#b8b8b8"
+        highlightColor="#e2e2e2"
+      />
+    ),
+  }
+);
+
 const TrackingOrderDetail = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const sum = cartItems
@@ -47,13 +69,23 @@ const TrackingOrderDetail = () => {
   return (
     <main className="w-full  py-5 flex flex-col items-center justify-center font-oxygen">
       <div className="w-[95%] p-8 bg-gray-100/70 rounded-md">
-        <div className="flex flex-row gap-2 text-3xl font-semibold items-center">
+        <motion.div
+          className="flex flex-row gap-2 text-3xl font-semibold items-center"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <Link to={"/MyAccount/TrackOrder"} className="font-poppins mt-1">
             &lt;
           </Link>
           <h1>Order Details</h1>
-        </div>
-        <div className="w-full p-4 text-white rounded bg-[#20263e] flex flex-row items-center justify-between mt-5">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="w-full p-4 text-white rounded bg-[#20263e] flex flex-row items-center justify-between mt-5"
+        >
           <div>
             <p className=" md:text-md text-[12px] font-medium">#123456</p>
             <p className=" text-[10px] mt-2">
@@ -63,11 +95,21 @@ const TrackingOrderDetail = () => {
           <div>
             <p className="text-lg md:text-[30px] font-medium">${sum}</p>
           </div>
-        </div>
-        <h1 className="mt-5 text-[14px] text-[#3C4242]">
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="mt-5 text-[14px] text-[#3C4242]"
+        >
           Order expected arrival 23 Oct, 2025
-        </h1>
-        <div className="w-full h-[70px] relative mt-8 flex">
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="w-full h-[70px] relative mt-8 flex"
+        >
           <div className="w-full absolute  h-[15px] bg-[#20263e]/30 z-0"></div>
           <div className="w-[26%] absolute h-[15px]  bg-[#20263e] z-0"></div>
           <div className="size-[22px] top-[-3px] left-[-3px] flex justify-center items-center bg-[#20263e] rounded-full z-10 absolute">
@@ -110,11 +152,24 @@ const TrackingOrderDetail = () => {
               Received
             </p>
           </div>
-        </div>
+        </motion.div>
         <div className="w-full mt-5 flex gap-4 flex-col">
-          <h1 className="text-sm font-medium">Order Activity</h1>
+          <motion.h1
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="text-sm font-medium"
+          >
+            Order Activity
+          </motion.h1>
           {Process.map(({ title, time }, index) => (
-            <div key={index} className="w-full flex gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              key={index}
+              className="w-full flex gap-3"
+            >
               <div className="md:size-[30px] size-[25px] bg-[#20263e] rounded-[2px] flex items-center justify-center">
                 <FontAwesomeIcon
                   icon={faCheck}
@@ -126,15 +181,27 @@ const TrackingOrderDetail = () => {
                 <br />
                 <p className="text-[#ADADAD]">{time}</p>
               </h1>
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="mt-5 font-exo">
-          <h1 className="text-sm font-medium">Item ({cartItems.length})</h1>
+          <motion.h1
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="text-sm font-medium"
+          >
+            Item ({cartItems.length})
+          </motion.h1>
           {cartItems.length == 0 ? (
-            <p className="border-y text-[#919191] my-3 py-5 flex items-center justify-center border-gray-500/40">
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="border-y text-[#919191] my-3 py-5 flex items-center justify-center border-gray-500/40"
+            >
               No Items In Order
-            </p>
+            </motion.p>
           ) : (
             <div className="mt-2">
               {cartItems.map(({ image, name, price, discount, qty }, index) => (
@@ -153,7 +220,12 @@ const TrackingOrderDetail = () => {
             </div>
           )}
         </div>
-        <div className="w-full mt-5">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="w-full mt-5"
+        >
           <ul className="grid lg:grid-cols-4 grid-cols-1 lg:gap-10 gap-5">
             <li>
               <h1 className="text-xl  font-semibold mb-3">Billing Address</h1>
@@ -211,7 +283,7 @@ const TrackingOrderDetail = () => {
               </Link>
             </li>
           </ul>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

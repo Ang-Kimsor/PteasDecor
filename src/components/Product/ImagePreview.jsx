@@ -1,5 +1,7 @@
+// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+// React
 import { useEffect } from "react";
 
 const ImagePreview = ({ imgshow, preview, setPreview }) => {

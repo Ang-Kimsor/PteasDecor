@@ -1,10 +1,18 @@
+// Icons
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// React
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const SuccessPayment = ({ setSuccess }) => {
   return (
-    <div className="w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] fixed py-[60px] rounded-xl top-1/2 -translate-1/2 left-1/2 z-20 bg-white flex flex-col items-center justify-center gap-6 font-exo">
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] fixed py-[60px] rounded-xl top-1/2 -translate-1/2 left-1/2 z-20 bg-white flex flex-col items-center justify-center gap-6 font-exo"
+    >
       <FontAwesomeIcon
         className="text-[50px] text-green-500"
         icon={faCheckCircle}
@@ -29,7 +37,7 @@ const SuccessPayment = ({ setSuccess }) => {
           Check Order Details
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

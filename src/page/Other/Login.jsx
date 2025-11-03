@@ -1,13 +1,23 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// React
 import { useState } from "react";
 import { Link } from "react-router-dom";
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+// Bg Image
 import Bg from "./../../assets/Login/LoginBg.jpg";
+// Motion
+import { motion } from "framer-motion";
 const Login = () => {
   const [visible, setVisible] = useState(false);
   return (
     <main className="w-full h-[550px] flex justify-center font-oxygen mt-24">
-      <div className="w-full lg:w-[95%] h-full relative flex lg:rounded-2xl lg:border border-gray-500/50">
+      <motion.div
+        className="w-full lg:w-[95%] h-full relative flex lg:rounded-2xl lg:border border-gray-500/50"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
         <form
           onSubmit={(e) => e.preventDefault()}
           className="bg-white h-fit rounded-xl lg:w-1/2 w-[95%] lg:h-full absolute top-1/2 left-1/2 -translate-1/2 lg:translate-0 lg:static lg:rounded-s-2xl lg:rounded-e-none p-8"
@@ -55,21 +65,20 @@ const Login = () => {
             type="submit"
             className=" rounded-full text-white bg-black flex justify-center items-center py-3 w-full mt-7 font-exo hover:cursor-pointer active:bg-gray-800"
           >
-            {" "}
             Login
           </button>
-          <button className="w-full text-center mt-4 hover:underline hover:cursor-pointer">
+          <p className="w-full text-center mt-4 hover:underline hover:cursor-pointer">
             Forgot your Password
-          </button>
+          </p>
         </form>
         <aside className="w-full lg:w-1/2 h-full lg:rounded-e-2xl">
           <img
             className="w-full h-full lg:rounded-e-2xl object-center object-cover"
             src={Bg}
-            alt=""
+            alt="Backgroud Image"
           />
         </aside>
-      </div>
+      </motion.div>
     </main>
   );
 };

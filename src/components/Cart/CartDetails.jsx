@@ -1,5 +1,7 @@
-import CartDetailsItem from "./CartDetailsItem";
+// React
 import { useSelector } from "react-redux";
+// Motion
+import { motion } from "framer-motion";
 const CartDetails = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const subtotal = cartItems.reduce(
@@ -23,7 +25,12 @@ const CartDetails = () => {
     },
   ];
   return (
-    <aside className="w-full h-fit rounded-xl flex flex-col font-exo font-[400] text-[#3D3D3D] text-[16px]">
+    <motion.aside
+      className="w-full h-fit rounded-xl flex flex-col font-exo font-[400] text-[#3D3D3D] text-[16px]"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <h1 className="py-5 bg-[#20263E] rounded-t-[11px] text-white ps-5 md:ps-[40px] lg:ps-5 text-sm  md:text-[20px] font-semibold">
         Cart Details
       </h1>
@@ -40,13 +47,16 @@ const CartDetails = () => {
         ) : (
           <div className="flex flex-col gap-2 text-[#949494] text-sm font-oxygen py-5 border-b-2 border-dashed border[#949494]">
             {cartItems.map(({ id, name, qty, price, discount }) => (
-              <CartDetailsItem
-                key={id}
-                name={name}
-                qty={qty}
-                price={price}
-                discount={discount}
-              />
+              <div key={id} className="grid grid-cols-[2fr_1fr_1fr]  font-exo">
+                <span>{name}</span>
+                <span className="flex justify-center">
+                  {qty < 10 && <span>0</span>}
+                  {qty}
+                </span>
+                <span className="flex justify-end">
+                  $ {(price * (1 - discount / 100) * qty).toFixed(2)}
+                </span>
+              </div>
             ))}
           </div>
         )}
@@ -63,7 +73,7 @@ const CartDetails = () => {
           </div>
         ))}
       </div>
-    </aside>
+    </motion.aside>
   );
 };
 

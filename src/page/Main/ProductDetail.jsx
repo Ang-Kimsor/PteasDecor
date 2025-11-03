@@ -1,14 +1,11 @@
+// React
 import { useRef, useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+// Data
 import { ProductItem } from "../../data/Product";
+// Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  CartWidget,
-  DescriptionReview,
-  ImagePreview,
-  ProductCard,
-  WishlistWidget,
-} from "../../components";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import {
   faBoxesStacked,
@@ -18,9 +15,63 @@ import {
   faStar,
   faTruckArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
+// Components
+import { CartWidget, ImagePreview, WishlistWidget } from "../../components";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
+// Redux State
 import { addtocart } from "./../../app/cartSlice";
 import { addtowishlist, removefromwishlist } from "../../app/wishlistSlice";
+// Component Product Card
+const ProductCard = loadable(
+  () => import("./../../components/Product/ProductCard"),
+  {
+    fallback: (
+      <div className="xl:h-[250px] lg:h-[240px] h-[200px] mb-10">
+        <Skeleton
+          width={"100%"}
+          height={"100%"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+          borderRadius={"20px"}
+        />
+        <Skeleton
+          width={"150px"}
+          height={"20px"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+        <Skeleton
+          width={"100px"}
+          height={"20px"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+      </div>
+    ),
+  }
+);
+// Component Description
+const DescriptionReview = loadable(
+  () => import("./../../components/Product/DescriptionReview"),
+  {
+    fallback: (
+      <section className="mt-16 w-full">
+        <Skeleton
+          width={"100%"}
+          height={"300px"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+      </section>
+    ),
+  }
+);
 const ProductDetail = () => {
   const { state } = useLocation();
   const { cartItems } = useSelector((state) => state.cart);
@@ -134,8 +185,26 @@ const ProductDetail = () => {
         setHeart={setWishlist}
       />
       <main className="w-full mt-10 flex flex-col items-center justify-center font-oxygen selection:bg-transparent">
-        <section className="w-[95%] flex flex-col">
-          <h1 className="flex md:text-[16px] text-[13px] items-center text-[#414141] gap-2">
+        <motion.section
+          className="w-[95%] flex flex-col"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.2 } },
+          }}
+        >
+          <motion.h1
+            variants={{
+              hidden: { y: -10, opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeInOut" },
+              },
+            }}
+            className="flex md:text-[16px] text-[13px] items-center text-[#414141] gap-2"
+          >
             <Link to={"/Products"} className="text-[#7B7B7B]">
               Product Listing
             </Link>
@@ -144,29 +213,58 @@ const ProductDetail = () => {
             {category}
             <p className="font-poppins text-[#7B7B7B] text-lg">&gt;</p>
             {name}
-          </h1>
-          <article className="w-full mt-5 grid lg:grid-cols-2 lg:gap-6 gap-5">
+          </motion.h1>
+          <motion.article
+            className="w-full mt-5 grid lg:grid-cols-2 lg:gap-6 gap-5"
+            variants={{
+              hidden: { y: -10, opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeInOut" },
+              },
+            }}
+          >
             <div className="flex lg:flex-row flex-col-reverse gap-5">
-              <div
+              <motion.div
                 className={`${
                   image.length < 3 ? "justify-start gap-5" : "justify-between"
                 } lg:w-[120px] 2xl:w-[200px] w-full h-fit lg:h-[600px] flex lg:flex-col flex-row lg:gap-5 lg:justify-start `}
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.2 } },
+                }}
               >
                 {image.map((item, index) => (
-                  <img
+                  <motion.img
                     key={index}
                     src={item}
                     onClick={() => setImgshow(item)}
                     className="rounded-md cursor-pointer lg:w-fit w-[32%] lg:h-1/3 object-cover object-center"
-                    alt=""
+                    alt={`Item Image - ${index}`}
+                    variants={{
+                      hidden: { y: -10, opacity: 0 },
+                      visible: {
+                        y: 0,
+                        opacity: 1,
+                        transition: { duration: 0.5, ease: "easeInOut" },
+                      },
+                    }}
                   />
                 ))}
-              </div>
-              <div className="w-full lg:[width:calc(100%-140px)] relative group">
+              </motion.div>
+              <motion.div
+                className="w-full lg:[width:calc(100%-140px)] relative group"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
                 <img
                   src={imgshow}
                   className="lg:h-[600px] 2xl:h-full h-full w-full object-cover object-center rounded-md"
-                  alt=""
+                  alt={name}
                 />
                 {discount > 0 && (
                   <span className="text-white absolute top-3 left-3 rounded bg-black/70 px-3 text-[12px] py-1">
@@ -179,10 +277,28 @@ const ProductDetail = () => {
                 >
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
-              </div>
+              </motion.div>
             </div>
-            <div className="lg:px-5 py-3 flex flex-col 2xl:gap-5 gap-3">
-              <span className="flex flex-row justify-between items-center">
+            <motion.div
+              className="lg:px-5 py-3 flex flex-col 2xl:gap-5 gap-3"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.2 } },
+              }}
+            >
+              <motion.span
+                className="flex flex-row justify-between items-center"
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+              >
                 <h1 className="md:text-[30px] text-[20px] font-bold text-[#2D2D2D]">
                   {name}
                 </h1>
@@ -193,8 +309,18 @@ const ProductDetail = () => {
                   onClick={handleWishlist}
                   icon={faHeart}
                 />
-              </span>
-              <div className="flex items-center gap-3">
+              </motion.span>
+              <motion.div
+                className="flex items-center gap-3"
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+              >
                 <p className=" border-r-2 md:text-[25px] text-[18px] text-[#414141] pr-3">
                   {discount > 0 && (
                     <del className="pr-2 md:text-lg text-sm text-black/40">
@@ -215,33 +341,73 @@ const ProductDetail = () => {
                 <p className="md:text-md text-[#414141] text-sm">
                   ({reviewCount.current} review)
                 </p>
-              </div>
+              </motion.div>
               <hr className="border-[#DDDDDD] my-3" />
-              <p className="text-[15px] text-[#414141]">
+              <motion.p
+                className="text-[15px] text-[#414141]"
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+              >
                 Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed
                 diam nonummy nibh euismod tincidunt ut laoreet dolore magn.
                 Lorem ipsum dolor sit amet, consectetuer adipi scing elit, sed
                 diam nonummy nibh euismod tincidunt ut laoreet dolore magn.
-              </p>
-              <ul className="list-disc list-inside text-[15px] text-[#414141]">
+              </motion.p>
+              <motion.ul
+                className="list-disc list-inside text-[15px] text-[#414141]"
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+              >
                 <li>Lorem ipsum dolor sit amet, adipi scing elit</li>
                 <li>
                   Lorem ipsum dolor sit amet, consectetuer adipi scing elit
                 </li>
                 <li>Lorem ipsum dolor sit amet, consectetuer adipi </li>
-              </ul>
+              </motion.ul>
 
               {stock == 0 ? (
-                <span className="flex items-center gap-5">
+                <motion.span
+                  className="flex items-center gap-5"
+                  variants={{
+                    hidden: { y: -10, opacity: 0 },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: { duration: 0.5, ease: "easeInOut" },
+                    },
+                  }}
+                >
                   <FontAwesomeIcon
                     className="text-[#B9B9B9]"
                     icon={faBoxesStacked}
                   />
                   <p className="text-[#424242] text-[15px]">Sold Out</p>
-                </span>
+                </motion.span>
               ) : (
                 <>
-                  <div className="w-full h-[50px] flex gap-5 selection:bg-transparent">
+                  <motion.div
+                    className="w-full h-[50px] flex gap-5 selection:bg-transparent"
+                    variants={{
+                      hidden: { y: -10, opacity: 0 },
+                      visible: {
+                        y: 0,
+                        opacity: 1,
+                        transition: { duration: 0.5, ease: "easeInOut" },
+                      },
+                    }}
+                  >
                     <div className="w-[130px] h-full flex items-center font-bold justify-between rounded-full border border-[#D7D7D7] text-[#414141]">
                       <p
                         onClick={handleDecrease}
@@ -286,13 +452,33 @@ const ProductDetail = () => {
                     >
                       Add to Cart
                     </button>
-                  </div>
-                  <button className="w-full border rounded-full h-[50px] font-bold text-[17px] cursor-pointer">
+                  </motion.div>
+                  <motion.button
+                    variants={{
+                      hidden: { y: -10, opacity: 0 },
+                      visible: {
+                        y: 0,
+                        opacity: 1,
+                        transition: { duration: 0.5, ease: "easeInOut" },
+                      },
+                    }}
+                    className="w-full border rounded-full h-[50px] font-bold text-[17px] cursor-pointer"
+                  >
                     Buy Now
-                  </button>
+                  </motion.button>
                 </>
               )}
-              <span className="flex items-center gap-5">
+              <motion.span
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+                className="flex items-center gap-5"
+              >
                 <FontAwesomeIcon
                   className="text-[#B9B9B9]"
                   icon={faTruckArrowRight}
@@ -300,8 +486,18 @@ const ProductDetail = () => {
                 <p className="text-[#424242] text-[15px]">
                   Free worldwide shipping on all orders over $100
                 </p>
-              </span>
-              <span className="flex items-center gap-5">
+              </motion.span>
+              <motion.span
+                variants={{
+                  hidden: { y: -10, opacity: 0 },
+                  visible: {
+                    y: 0,
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeInOut" },
+                  },
+                }}
+                className="flex items-center gap-5"
+              >
                 <FontAwesomeIcon
                   className="text-[#B9B9B9]"
                   icon={faParachuteBox}
@@ -309,19 +505,29 @@ const ProductDetail = () => {
                 <p className="text-[#424242] text-[15px]">
                   Delivers in: 3-7 Working Days Shipping & Return
                 </p>
-              </span>
-            </div>
-          </article>
-        </section>
+              </motion.span>
+            </motion.div>
+          </motion.article>
+        </motion.section>
 
-        <section className="bg-[#F8F8F8] mt-16 w-full flex items-center justify-center py-10">
+        <motion.section
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="bg-[#F8F8F8] mt-16 w-full flex items-center justify-center py-10"
+        >
           <DescriptionReview />
-        </section>
+        </motion.section>
 
         <section className="flex mt-24 flex-col w-[95%] bg-white">
-          <h1 className="md:text-4xl md:text-start text-center text-[#3D3D3D] text-2xl tracking-wider font-semibold  md:mb-0 mb-3">
+          <motion.h1
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="md:text-4xl md:text-start text-center text-[#3D3D3D] text-2xl tracking-wider font-semibold  md:mb-0 mb-3"
+          >
             Similar Products
-          </h1>
+          </motion.h1>
           <div className="grid grid-cols-2 gap-4 mt-10 lg:grid-cols-4">
             {similarProduct.map(
               (

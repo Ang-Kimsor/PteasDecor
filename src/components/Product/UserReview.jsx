@@ -1,6 +1,13 @@
+// Motion
+import { motion } from "framer-motion";
 const UserReview = ({ img, username, review }) => {
   return (
-    <div className="border-2 rounded-2xl border-[#D3D3D3] p-4">
+    <motion.div
+      className="border-2 rounded-2xl border-[#D3D3D3] p-4"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <div className="w-full flex justify-between items-center">
         <span className="flex items-center gap-3">
           <img src={img} className="size-[40px] rounded-full" alt="" />
@@ -15,7 +22,7 @@ const UserReview = ({ img, username, review }) => {
         <p className="cursor-pointer">Reply</p>
         <p>5m</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

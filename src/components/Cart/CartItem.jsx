@@ -1,5 +1,8 @@
+// Icons
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Motion
+import { motion } from "framer-motion";
 const CartItem = ({
   name,
   price,
@@ -12,7 +15,12 @@ const CartItem = ({
 }) => {
   const finalPrice = (price - (price * discount) / 100).toFixed(2);
   return (
-    <div className="grid grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_1fr_1fr] gap-3 w-full py-5 px-4 border-t border-gray-300">
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="grid grid-cols-[1fr_1fr_1fr_1fr] md:grid-cols-[3fr_1fr_1fr_1fr] gap-3 w-full py-5 px-4 border-t border-gray-300"
+    >
       <div className="flex items-center gap-4">
         <FontAwesomeIcon
           className="text-[10px] md:text-[12px] hover:cursor-pointer"
@@ -49,7 +57,7 @@ const CartItem = ({
       <h1 className="w-full flex justify-center items-center text-[14px] md:text-[16px] text-[#949494]">
         ${(finalPrice * qty).toFixed(2)}
       </h1>
-    </div>
+    </motion.div>
   );
 };
 

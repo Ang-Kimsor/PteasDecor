@@ -1,11 +1,63 @@
-import { CartItem, ProductCard } from "../../components";
+// React
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { removefromcart, increaseqty, decreaseqty } from "../../app/cartSlice";
-import { ProductItem } from "../../data/Product";
 import { useRef } from "react";
-import { emptycart } from "../../app/cartSlice";
+import {
+  removefromcart,
+  increaseqty,
+  decreaseqty,
+  emptycart,
+} from "../../app/cartSlice";
+// Data
+import { ProductItem } from "../../data/Product";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
 
+const CartItem = loadable(() => import("./../../components/Cart/CartItem"), {
+  fallback: (
+    <Skeleton
+      width={"100%"}
+      height={"80px"}
+      baseColor="#b8b8b8"
+      highlightColor="#e2e2e2"
+    />
+  ),
+});
+
+// Component Product Card
+const ProductCard = loadable(
+  () => import("./../../components/Product/ProductCard"),
+  {
+    fallback: (
+      <div className="xl:h-[250px] lg:h-[240px] h-[200px] mb-10">
+        <Skeleton
+          width={"100%"}
+          height={"100%"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+          borderRadius={"20px"}
+        />
+        <Skeleton
+          width={"150px"}
+          height={"20px"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+        <Skeleton
+          width={"100px"}
+          height={"20px"}
+          baseColor="#b8b8b8"
+          highlightColor="#e2e2e2"
+        />
+      </div>
+    ),
+  }
+);
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -24,7 +76,12 @@ const Cart = () => {
   return (
     <main className="flex flex-col items-center w-full h-full gap-10 mt-16 font-oxygen">
       <section className="w-[95%] font-exo">
-        <div className="flex items-center justify-between">
+        <motion.div
+          className="flex items-center justify-between"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <h1 className="text-3xl  font-bold text-[#2d2d2d]">Cart</h1>
           <p
             onClick={() => dispatch(emptycart())}
@@ -32,12 +89,17 @@ const Cart = () => {
           >
             Clear All
           </p>
-        </div>
-        <p className="text-[16px] text-[#575757] mt-4 ">
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-[16px] text-[#575757] mt-4 "
+        >
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
           nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
           volutpat.
-        </p>
+        </motion.p>
       </section>
       <section className="w-[95%] flex flex-col lg:flex-row gap-[30px] lg:gap-[50px] font-exo">
         <aside className="w-full lg:w-[65%] h-fit rounded-xl flex flex-col">
@@ -48,9 +110,14 @@ const Cart = () => {
             <h1 className="w-full text-center pe-[20px]">Total</h1>
           </div>
           {cartItems.length == 0 ? (
-            <p className="w-full text-lg h-[345px] border-t-0 flex items-center justify-center text-[#919191] border-2 border-[#DEDFE1] rounded-b-[11px]">
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="w-full text-lg h-[345px] border-t-0 flex items-center justify-center text-[#919191] border-2 border-[#DEDFE1] rounded-b-[11px]"
+            >
               No Items In Cart.
-            </p>
+            </motion.p>
           ) : (
             <div className="border-2 border-t-0 border-[#DEDFE1] rounded-b-[11px]">
               {cartItems.map(
@@ -72,7 +139,12 @@ const Cart = () => {
             </div>
           )}
         </aside>
-        <aside className="w-full lg:w-[35%] h-fit rounded-xl flex flex-col">
+        <motion.aside
+          className="w-full lg:w-[35%] h-fit rounded-xl flex flex-col"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <h1 className="py-5 bg-[#20263E] rounded-t-[11px] text-white ps-5 md:ps-[40px] lg:ps-5 text-sm md:text-[20px]">
             Cart Total
           </h1>
@@ -90,12 +162,12 @@ const Cart = () => {
             </div>
           </div>
           <Link
-            to={"/Checkout"}
+            to={`${cartItems.length === 0 ? "/Products" : "/Checkout"}`}
             className="py-5 bg-black font-exo rounded-b-[11px] text-white text-center text-[18px] hover:cursor-pointer hover:bg-black/90 active:bg-black/80"
           >
-            Proceed to Checkout
+            {cartItems.length === 0 ? "Shop Now" : "Proceed to Checkout"}
           </Link>
-        </aside>
+        </motion.aside>
       </section>
       <section className="w-[95%]">
         <h1 className="md:text-[30px] text-2xl font-bold">You May Also Like</h1>

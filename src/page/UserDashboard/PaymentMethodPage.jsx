@@ -1,7 +1,14 @@
-import { PaymentCard } from "../../components";
+// Image Payment
 import master from "../../assets/Payment/master.jpg";
 import visa from "../../assets/Payment/visa.jpg";
 import paypal from "../../assets/Payment/paypal.jpg";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
 const paymentCards = [
   {
     id: 1,
@@ -31,15 +38,68 @@ const paymentCards = [
     Default: false,
   },
 ];
+const PaymentCard = loadable(
+  () => import("./../../components/UserDashboard/PaymentCard"),
+  {
+    fallback: (
+      <Skeleton
+        width={"100%"}
+        height={"100px"}
+        baseColor="#b8b8b8"
+        highlightColor="#e2e2e2"
+      />
+    ),
+  }
+);
 const PaymentMethodPage = () => {
   return (
-    <main className="w-full h-full px-[20px] lg:px-[50px] flex flex-col gap-5 mt-[50px] font-oxygen">
-      <h1 className="text-[30px] font-semibold">Payment Methods</h1>
-      <span className="font-medium">
+    <motion.main
+      className="w-full h-full px-[20px] lg:px-[50px] flex flex-col gap-5 mt-[50px] font-oxygen"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.2 } },
+      }}
+    >
+      <motion.h1
+        variants={{
+          hidden: { y: -10, opacity: 0 },
+          visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.5, ease: "easeInOut" },
+          },
+        }}
+        className="text-[30px] font-semibold"
+      >
+        Payment Methods
+      </motion.h1>
+      <motion.span
+        variants={{
+          hidden: { y: -10, opacity: 0 },
+          visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.5, ease: "easeInOut" },
+          },
+        }}
+        className="font-medium"
+      >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam natus
         aliquam, rerum incidunt consectetur Lorem ipsum dolor sit..
-      </span>
-      <div className="w-full h-full flex flex-col gap-3">
+      </motion.span>
+      <motion.div
+        variants={{
+          hidden: { y: -10, opacity: 0 },
+          visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.5, ease: "easeInOut" },
+          },
+        }}
+        className="w-full h-full flex flex-col gap-3"
+      >
         {paymentCards.map(
           ({ id, name, img, cardNum, cvv, expiry, Default }) => (
             <PaymentCard
@@ -53,11 +113,21 @@ const PaymentMethodPage = () => {
             />
           )
         )}
-      </div>
-      <button className="px-[10%] w-fit py-2 md:py-3 rounded-full text-white bg-black hover:bg-black/90 active:bg-black/80 font-exo">
+      </motion.div>
+      <motion.button
+        variants={{
+          hidden: { y: -10, opacity: 0 },
+          visible: {
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.5, ease: "easeInOut" },
+          },
+        }}
+        className="px-[10%] w-fit py-2 md:py-3 rounded-full text-white bg-black hover:bg-black/90 active:bg-black/80 font-exo"
+      >
         Add New Card
-      </button>
-    </main>
+      </motion.button>
+    </motion.main>
   );
 };
 

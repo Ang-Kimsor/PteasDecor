@@ -1,3 +1,4 @@
+// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -5,6 +6,8 @@ import {
   faExternalLink,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+// Motion
+import { motion } from "framer-motion";
 const OrderEntry = ({
   orderid,
   status,
@@ -17,10 +20,13 @@ const OrderEntry = ({
   qty,
 }) => {
   return (
-    <div
+    <motion.div
       className={`w-full grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] items-center md:grid-cols-[1fr_2fr_1fr_1fr_1fr_1fr] gap-3 ${
         status == "Failed" && "rounded-b-xl"
       } py-7 border-2 border-t-0 border-[#CECECE]`}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       <p className="ps-[10px] md:ps-[20px] font-bold text-[#6A6A6A]">
         {orderid}
@@ -59,7 +65,7 @@ const OrderEntry = ({
       <p className="text-[8px] md:text-[12px] text-[#6A6A6A]">
         ${(price * (1 - discount / 100) * qty).toFixed(2)}
       </p>
-    </div>
+    </motion.div>
   );
 };
 

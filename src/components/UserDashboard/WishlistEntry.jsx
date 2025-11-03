@@ -1,10 +1,14 @@
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShoppingBag,
   faTrash,
   faWarning,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Motion
+import { motion } from "framer-motion";
+// React
 import { useSelector } from "react-redux";
 const WishlistEntry = ({
   id,
@@ -19,9 +23,11 @@ const WishlistEntry = ({
 }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const InCart = cartItems.find((item) => item.id == id);
-  console.log("Incart: ", InCart);
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className={`${
         len ? "rounded-b-[11px]" : null
       } w-full grid grid-cols-[1fr_1fr_1fr_1fr_1fr] items-center md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-3 py-7 border-2 border-t-0 border-[#DEDFE1] `}
@@ -54,7 +60,7 @@ const WishlistEntry = ({
           } p-2 rounded md:text-[18px] `}
         />
       </p>
-    </div>
+    </motion.div>
   );
 };
 

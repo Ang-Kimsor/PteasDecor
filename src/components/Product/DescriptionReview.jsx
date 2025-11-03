@@ -1,7 +1,13 @@
+// React
 import { useState } from "react";
-import UserReview from "./UserReview";
+// Profile Image
 import Profile from "./../../assets/Blog/Profile1.jpg";
+// Data
 import { reviewUser } from "../../data/Product";
+// Motion
+import { motion } from "framer-motion";
+// Component
+import UserReview from "./UserReview";
 const DescriptionReview = () => {
   const [showdes, setShowdes] = useState(true);
   const [username, setUsername] = useState("");
@@ -24,7 +30,12 @@ const DescriptionReview = () => {
   };
   return (
     <div className="w-[95%]">
-      <span className="flex gap-4 items-center text-[23px]">
+      <motion.span
+        className="flex gap-4 items-center text-[23px]"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
         <h1
           className={`${showdes && "font-bold"} text-[#696969] cursor-pointer`}
           onClick={() => setShowdes(true)}
@@ -38,9 +49,14 @@ const DescriptionReview = () => {
         >
           Reviews
         </h1>
-      </span>
+      </motion.span>
       {showdes ? (
-        <div className="mt-5">
+        <motion.div
+          className="mt-5"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <h1 className=" text-[#575757] text-[12px] md:text-[15px]">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -71,7 +87,7 @@ const DescriptionReview = () => {
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </li>
           </ul>
-        </div>
+        </motion.div>
       ) : (
         <div className="flex flex-col gap-8 mt-5">
           {review.map(({ img, username, review }, index) => (
@@ -82,7 +98,12 @@ const DescriptionReview = () => {
               review={review}
             />
           ))}
-          <div className="flex border-2 rounded-2xl gap-5 border-[#D3D3D3] bg-[#F2F2F2] p-4">
+          <motion.div
+            className="flex border-2 rounded-2xl gap-5 border-[#D3D3D3] bg-[#F2F2F2] p-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
             <span>
               <img src={Profile} className="size-[40px] rounded-full" alt="" />
             </span>
@@ -136,7 +157,7 @@ const DescriptionReview = () => {
                 Post Review <p className="font-poppins text-xl">&gt;</p>
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

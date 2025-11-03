@@ -1,5 +1,37 @@
+// React
 import { useNavigate } from "react-router-dom";
-import { CartDetails, InputForm } from "../../components";
+// Loadable
+import loadable from "@loadable/component";
+// Skeleton
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+// Motion
+import { motion } from "framer-motion";
+
+const InputForm = loadable(() => import("./../../components/Cart/InputForm"), {
+  fallback: (
+    <Skeleton
+      width={"100%"}
+      height={"40px"}
+      baseColor="#b8b8b8"
+      highlightColor="#e2e2e2"
+    />
+  ),
+});
+const CartDetails = loadable(
+  () => import("./../../components/Cart/CartDetails"),
+  {
+    fallback: (
+      <Skeleton
+        width={"100%"}
+        height={"440px"}
+        baseColor="#b8b8b8"
+        highlightColor="#e2e2e2"
+        borderRadius={"5px"}
+      />
+    ),
+  }
+);
 const Checkout = () => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -9,14 +41,24 @@ const Checkout = () => {
   return (
     <main className="flex flex-col items-center w-full h-full mt-16 gap-8 font-exo">
       <section className="w-[95%]">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl  font-bold text-[#2d2d2d]">Checkout</h1>
-        </div>
-        <p className="text-[16px] text-[#575757] mt-4 ">
+        <motion.h1
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-3xl  font-bold text-[#2d2d2d]"
+        >
+          Checkout
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="text-[16px] text-[#575757] mt-4 "
+        >
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
           nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
           volutpat.
-        </p>
+        </motion.p>
       </section>
       <section className="w-[95%] flex flex-col-reverse lg:flex-row gap-10 lg:gap-[4%]">
         <aside className="w-full lg:w-[58%] h-fit rounded-xl  flex flex-col pb-5">
