@@ -248,8 +248,7 @@ Project Link: [https://github.com/Ang-Kimsor/PteasDecor](https://github.com/KimA
 [React-url]: https://reactjs.org/
 [ReactRedux.js]: https://img.shields.io/badge/ReactRedux-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [ReactRedux-url]: https://react-redux.js.org/
-
-[Loadable]: https://img.shields.io/badge/Loadable Components-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[Loadable]: https://img.shields.io/badge/Loadable%20Components-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [ReactRouter.js]: https://img.shields.io/badge/ReactRouter-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [ReactRouter-url]: https://reactrouter.com/
 [ReactLoadingSkeleton.js]: https://img.shields.io/badge/React%20Loading%20Skeleton-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
