@@ -46,7 +46,7 @@
 
 ## About The Project
 
-[![Project Screenshot][project-screenshot]](https://example.com)
+[![Project Screenshot][project-screenshot]]()
 
 There are plenty of e-commerce projects out there, but I didn’t find one that perfectly fit a modern home decoration store built with ReactJS — so I created PteasDecor. This project aims to be a clean, easy-to-use template for anyone building a home décor shopping site.
 
@@ -71,8 +71,11 @@ Of course, every project has its own unique needs, so I’m continuously improvi
 [![FontAwesome][FontAwesome]][FontAwesome-url]
 [![JS][JS]][JS-url]
 [![React][React.js]][React-url]
+[![Loadable][Loadable]][React-url]
 [![ReactRouter][ReactRouter.js]][ReactRouter-url]
 [![ReactRedux][ReactRedux.js]][ReactRedux-url]
+[![ReactLoadingSkeleton][ReactLoadingSkeleton.js]][ReactLoadingSkeleton-url]
+[![FramerMotion][FramerMotion.js]][FramerMotion-url]
 
 <!-- GETTING STARTED -->
 <p id="getting-started">
@@ -211,8 +214,6 @@ Contributions are welcome! Feel free to fork the repo, create feature branches, 
 
 **Nak Danin** - [Telegram](https://t.me/nakdanin) - [nakdanin9@gmail.com](mailto:nakdanin9@gmail.com) - **Call Me ☎️ +855 85 201 548**
 
-**Heng Ousa** - [Telegram](https://hengousa) - [hengousa@gmail.com](mailto:hengousa@gmail.com) - **Call Me ☎️**
-
 Project Link: [https://github.com/Kimsor1111/PteasDecor](https://github.com/Kimsor1111/PteasDecor)
 
 <p id="acknowledgments">
@@ -245,7 +246,13 @@ Project Link: [https://github.com/Kimsor1111/PteasDecor](https://github.com/Kims
 [TailwindCSS-url]: https://tailwindcss.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[ReactRouter.js]: https://img.shields.io/badge/ReactRouter-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[ReactRouter-url]: https://reactrouter.com/
 [ReactRedux.js]: https://img.shields.io/badge/ReactRedux-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [ReactRedux-url]: https://react-redux.js.org/
+
+[Loadable]: https://img.shields.io/badge/Loadable Components-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[ReactRouter.js]: https://img.shields.io/badge/ReactRouter-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[ReactRouter-url]: https://reactrouter.com/
+[ReactLoadingSkeleton.js]: https://img.shields.io/badge/React%20Loading%20Skeleton-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[ReactLoadingSkeleton-url]: https://www.npmjs.com/package/react-loading-skeleton
+[FramerMotion.js]: https://img.shields.io/badge/Framer%20Motion-20232A?style=for-the-badge&logo=javascript&logoColor=F7DF1E
+[FramerMotion-url]: https://motion.dev/
