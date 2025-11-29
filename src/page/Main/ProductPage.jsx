@@ -71,6 +71,8 @@ const ProductPage = () => {
   ];
   const [category, setCategory] = useState(options[0].value);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [submitSearch, setSubmitSearch] = useState("");
   const handleCategory = (value) => {
     setCategory(value);
   };
@@ -103,10 +105,14 @@ const ProductPage = () => {
           p.price * (1 - p.discount / 100) <= max
       );
     }
+    if (submitSearch.trim !== "")
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().startsWith(submitSearch.toLowerCase())
+      );
     setLoading(true);
     setTimeout(() => setLoading(false), 2000);
     return filtered;
-  }, [category, price]);
+  }, [category, price, submitSearch]);
 
   return (
     <main className="w-screen lg:w-full h-auto relative lg:flex mt-[20px] font-oxygen">
@@ -208,7 +214,11 @@ const ProductPage = () => {
           >
             Our Collection Of Products
           </motion.span>
-          <motion.div
+          <motion.form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSubmitSearch(search);
+            }}
             className="relative w-[95%] lg:w-full"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -218,12 +228,18 @@ const ProductPage = () => {
               className="w-full sticky top-0 font-oxygen ps-[20px] pe-[8px] text-[16px] text-[#5F5F5F] rounded-[42px] border-[1px] border-[#00000026] py-[8px] focus:outline-none focus:bg-transparent focus:ring-0"
               type="search"
               placeholder="Search An Item"
+              value={search}
+              onChange={(e) => {
+                e.target.value === "" && setSubmitSearch("");
+                setSearch(e.target.value);
+              }}
             />
             <FontAwesomeIcon
               className="absolute right-[5px] top-1/2 -translate-y-1/2 bg-[#666666] text-white rounded-[24px] p-[8px] hover:cursor-pointer active:bg-black/90"
               icon={faSearch}
+              onClick={() => setSubmitSearch(search)}
             />
-          </motion.div>
+          </motion.form>
           <motion.div
             className="w-[95%] flex gap-2 items-center lg:hidden"
             initial={{ opacity: 0, y: -10 }}
@@ -261,6 +277,8 @@ const ProductPage = () => {
                 onClick={() => {
                   setCategory(options[0].value);
                   setPrice(priceRange[0].value);
+                  setSearch("");
+                  setSubmitSearch("");
                 }}
               >
                 Clear Filter
