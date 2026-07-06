@@ -115,96 +115,85 @@ const ProductPage = () => {
   }, [category, price, submitSearch]);
 
   return (
-    <main className="w-screen lg:w-full h-auto relative lg:flex mt-[20px] font-oxygen">
+    <main className="w-full mx-auto px-4 md:px-6 py-6 relative lg:flex gap-8 font-oxygen mt-[20px]">
+      {/* Overlay Backdrop */}
+      <div
+        className={`bg-black/50 backdrop-blur-xs fixed inset-0 z-[105] lg:hidden transition-all duration-300 ${filter ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        onClick={() => setFilter(false)}
+      ></div>
+
+      {/* Filter Sidebar / Mobile Drawer */}
       <aside
-        className={`lg:w-[27%] xl:w-[22%] fixed lg:sticky top-20 lg:top-[15%] w-full md:w-1/2 lg:translate-x-0 z-[10] bg-white h-full duration-500 ${
-          filter ? "translate-x-0" : "translate-x-[-100%]"
-        }`}
+        className={`fixed lg:sticky top-0 lg:top-[110px] left-0 h-screen lg:h-fit lg:max-h-[calc(100vh-130px)] w-[320px] max-w-[85vw] lg:w-[27%] xl:w-[22%] z-[110] lg:z-10 bg-white lg:bg-transparent shadow-2xl lg:shadow-none transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col lg:self-start ${filter ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
-        <div className="flex justify-end lg:mt-0 mt-[20px] w-full pe-[20px] lg:hidden">
-          <FontAwesomeIcon
-            className="text-[25px]"
+        {/* Mobile Drawer Header */}
+        <div className="flex justify-between items-center px-6 py-5 border-b border-gray-100 lg:hidden">
+          <span className="text-xl font-semibold text-gray-800">Filters</span>
+          <button
             onClick={() => setFilter(false)}
-            icon={faX}
-          />
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 hover:bg-gray-100 active:scale-95 transition-all text-gray-500"
+          >
+            <FontAwesomeIcon icon={faX} className="text-sm" />
+          </button>
         </div>
-        <div className="w-full h-auto lg:overflow-y-auto lg:max-h-[calc(100vh-100px)] flex flex-col lg:items-center items-center gap-[20px]">
-          <motion.div
-            className="flex flex-col justify-center px-[20px] py-[20px] border-[1px] border-[#E2E2E2] h-fit w-[230px] lg:w-[240px] xl:w-[80%]"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.2 } },
-            }}
-          >
-            <motion.span
-              className="border-s-2 border-black ps-2 text-[22px] font-medium text-[#2D2D2D]"
-              variants={{
-                hidden: { y: -10, opacity: 0 },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                  transition: { duration: 0.5, ease: "easeInOut" },
-                },
-              }}
-            >
-              Categories
-            </motion.span>
-            <ul className="flex flex-col gap-2 mt-2">
-              {options.map(({ label, value }) => (
-                <Checkbox
-                  key={value}
-                  label={label}
-                  value={value}
-                  topic={category}
-                  onChange={handleCategory}
-                />
-              ))}
-            </ul>
-          </motion.div>
-          <motion.div
-            className="flex flex-col justify-center px-[20px] py-[20px] border-[1px] border-[#E2E2E2] h-fit w-[230px] lg:w-[240px] xl:w-[80%]"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.2 } },
-            }}
-          >
-            <motion.span
-              className="border-s-2 border-black ps-2 text-[22px] font-medium text-[#2D2D2D]"
-              variants={{
-                hidden: { y: -10, opacity: 0 },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                  transition: { duration: 0.5, ease: "easeInOut" },
-                },
-              }}
-            >
-              Price Range
-            </motion.span>
-            <ul className="flex flex-col gap-2 mt-2">
-              {priceRange.map(({ label, value }) => (
-                <Checkbox
-                  key={value}
-                  label={label}
-                  value={value}
-                  topic={price}
-                  onChange={handlePrice}
-                />
-              ))}
-            </ul>
-          </motion.div>
+
+        {/* Scrollable Container */}
+        <div className="flex-1 overflow-y-auto px-6 py-6 lg:p-0 lg:overflow-y-auto flex flex-col gap-6 lg:gap-5">
+          <div className="bg-white lg:border lg:border-gray-200/80 lg:rounded-2xl lg:p-6 lg:shadow-xs space-y-6">
+            <div>
+              <span className="text-[17px] font-semibold text-gray-900 border-s-3 border-[#3D3D3D] ps-2.5 block mb-4">
+                Categories
+              </span>
+              <ul className="flex flex-col gap-2.5">
+                {options.map(({ label, value }) => (
+                  <Checkbox
+                    key={value}
+                    label={label}
+                    value={value}
+                    topic={category}
+                    onChange={handleCategory}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <div className="border-t border-gray-100 pt-6 lg:pt-5">
+              <span className="text-[17px] font-semibold text-gray-900 border-s-3 border-[#3D3D3D] ps-2.5 block mb-4">
+                Price Range
+              </span>
+              <ul className="flex flex-col gap-2.5">
+                {priceRange.map(({ label, value }) => (
+                  <Checkbox
+                    key={value}
+                    label={label}
+                    value={value}
+                    topic={price}
+                    onChange={handlePrice}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            {/* Clear Filters Button inside Sidebar */}
+            {(category !== options[0].value || price !== priceRange[0].value) && (
+              <button
+                onClick={() => {
+                  setCategory(options[0].value);
+                  setPrice(priceRange[0].value);
+                }}
+                className="w-full mt-4 bg-gray-100 hover:bg-gray-200/85 text-gray-700 font-medium py-2.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 active:scale-98"
+              >
+                Clear All Filters
+              </button>
+            )}
+          </div>
         </div>
       </aside>
-      <div
-        className={`bg-black opacity-50 fixed top-0 right-0 z-[5] w-full h-full lg:hidden ${
-          filter ? "block" : "hidden"
-        }`}
-      ></div>
-      <aside className="lg:w-[73%] xl:w-[78%] w-full  h-full flex flex-col items-center z-[1]">
+
+      {/* Main Content Area */}
+      <aside className="lg:w-[73%] xl:w-[78%] w-full h-full flex flex-col items-center z-[1]">
         <div className="lg:w-[98%] w-full flex flex-col items-center lg:items-baseline gap-5">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -288,49 +277,49 @@ const ProductPage = () => {
             <div className="grid grid-cols-2 w-[95%] md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-[30px] space-y-5 mx-10 lg:mx-0">
               {loading
                 ? Filter.map((_, index) => (
-                    <div
-                      key={index}
-                      className="xl:h-[250px] lg:h-[240px] h-[200px] mb-10"
-                    >
-                      <Skeleton
-                        width={"100%"}
-                        height={"100%"}
-                        baseColor="#b8b8b8"
-                        highlightColor="#e2e2e2"
-                        borderRadius={"20px"}
-                      />
-                      <Skeleton
-                        width={"150px"}
-                        height={"20px"}
-                        baseColor="#b8b8b8"
-                        highlightColor="#e2e2e2"
-                      />
-                      <Skeleton
-                        width={"100px"}
-                        height={"20px"}
-                        baseColor="#b8b8b8"
-                        highlightColor="#e2e2e2"
-                      />
-                    </div>
-                  ))
+                  <div
+                    key={index}
+                    className="xl:h-[250px] lg:h-[240px] h-[200px] mb-10"
+                  >
+                    <Skeleton
+                      width={"100%"}
+                      height={"100%"}
+                      baseColor="#b8b8b8"
+                      highlightColor="#e2e2e2"
+                      borderRadius={"20px"}
+                    />
+                    <Skeleton
+                      width={"150px"}
+                      height={"20px"}
+                      baseColor="#b8b8b8"
+                      highlightColor="#e2e2e2"
+                    />
+                    <Skeleton
+                      width={"100px"}
+                      height={"20px"}
+                      baseColor="#b8b8b8"
+                      highlightColor="#e2e2e2"
+                    />
+                  </div>
+                ))
                 : Filter.map(
-                    (
-                      { id, name, price, discount, stock, rate, category, img },
-                      index
-                    ) => (
-                      <ProductCard
-                        key={index}
-                        id={id}
-                        name={name}
-                        price={price}
-                        discount={discount}
-                        stock={stock}
-                        rate={rate}
-                        category={category}
-                        img={img[0]}
-                      />
-                    )
-                  )}
+                  (
+                    { id, name, price, discount, stock, rate, category, img },
+                    index
+                  ) => (
+                    <ProductCard
+                      key={index}
+                      id={id}
+                      name={name}
+                      price={price}
+                      discount={discount}
+                      stock={stock}
+                      rate={rate}
+                      category={category}
+                      img={img[0]}
+                    />
+                  )
+                )}
             </div>
           )}
         </div>
